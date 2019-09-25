@@ -3,14 +3,18 @@ import React from "react";
 import Styled from "styled-components";
 import GlobalStyle from "components/global-styles";
 import ThemeProvider from "components/theme-provider";
+import ThemeContextProvider, { ThemeContext } from "context/theme-context";
 
-const PageWrapper = Styled.div<any>`
+const PagesWrapper = Styled.div<any>`
   background-color: ${props =>
-    props.theme ? props.theme.colors.white : "#111111"};
-  color: ${props => (props.theme ? props.theme.colors.black : "#111111")};
-  min-height: 300vh;
+    props.background ? props.background : "#111111"};
+  color: ${props => (props.foreground ? props.foreground : "#111111")};
   width: 100%;
-  transition: transform .3s ease-out; 
+  transition: transform .3s ease-out, color .35s ease-out, background-color .375s ease-out ;   
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 `;
 
 interface Props {
@@ -26,16 +30,35 @@ export default class MyApp extends App<Props, {}> {
     this.pageWrapper = React.createRef<HTMLDivElement>();
   }
 
+  componentDidMount() {
+    const LocomotiveScroll = require("locomotive-scroll").default;
+    const Scroll = new LocomotiveScroll({
+      el: this.pageWrapper.current,
+      smooth: true,
+      smoothMobile: true
+    });
+  }
+
   render() {
     const { Component, pageProps } = this.props;
+
     return (
       <ThemeProvider>
-        <React.Fragment>
-          <GlobalStyle />
-          <PageWrapper ref={this.pageWrapper}>
-            <Component {...pageProps} />
-          </PageWrapper>
-        </React.Fragment>
+        <ThemeContextProvider>
+          <React.Fragment>
+            <GlobalStyle />
+            <ThemeContext.Consumer>
+              {value => (
+                <PagesWrapper
+                  foreground={value.theme.foreground}
+                  background={value.theme.background}
+                  ref={this.pageWrapper}>
+                  <Component {...pageProps} />
+                </PagesWrapper>
+              )}
+            </ThemeContext.Consumer>
+          </React.Fragment>
+        </ThemeContextProvider>
       </ThemeProvider>
     );
   }
