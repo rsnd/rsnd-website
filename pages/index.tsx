@@ -2,6 +2,9 @@ import React from "react";
 import Head from "next/head";
 import Styled from "styled-components";
 
+// Page-Sections
+import Section1 from "components/page-components/home-page/homepage-section-1";
+
 const PageSection = Styled.div`
   background: transparent;
   height: 200vh;
@@ -14,34 +17,8 @@ const Home = () => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="hero">
-        <div className="page-container">
-          <PageSection data-scroll-section>
-            <h1
-              data-scroll
-              data-scroll-speed="5"
-              data-scroll-position="top"
-              className="title">
-              Home
-            </h1>
-            <p
-              data-scroll
-              data-scroll-speed="2"
-              data-scroll-position="top"
-              className="title">
-              Stuff, Stuff, Stuff
-            </p>
-            <p
-              data-scroll
-              data-scroll-speed="2"
-              data-scroll-position="top"
-              data-scroll-direction="horizontal"
-              className="title">
-              Stuff, Stuff, Stuff
-            </p>
-            <p>Stuff, Stuff, Stuff</p>
-          </PageSection>
-        </div>
+      <div className="page-container">
+        <Section1 />
       </div>
     </React.Fragment>
   );
