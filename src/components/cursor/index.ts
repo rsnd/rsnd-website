@@ -1,1 +1,3 @@
-import {} from "./custom-cursor";
+import Cursor from "./custom-cursor";
+
+export default Cursor;

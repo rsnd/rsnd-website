@@ -1,4 +1,4 @@
-interface ILink {
+export interface ILink {
   href: string;
   label: string;
   key?: string;
@@ -6,7 +6,7 @@ interface ILink {
   options?: IDropdownOptions[];
 }
 
-interface IDropdownOptions {
+export interface IDropdownOptions {
   label: string;
   icon: string;
   href: string;
@@ -22,11 +22,24 @@ const routes = [
     label: "Subscribe",
     dropdown: true,
     options: [
-      { label: "iTunes", icon: "#", href: "#" },
-      { label: "Spotify", icon: "#", href: "#" },
-      { label: "Google Podcasts", icon: "#", href: "#" }
+      {
+        label: "iTunes",
+        icon: "../../../static/logos/apple-logo.svg",
+        href: "#"
+      },
+      {
+        label: "Spotify",
+        icon: "../../../static/logos/spotify.svg",
+        href: "#"
+      },
+      {
+        label: "Google Podcasts",
+        icon: "../../../static/logos/google-podcasts-logo.svg",
+        href: "#"
+      }
     ]
-  }
+  },
+  { href: "/contact", label: "Contact" }
 ].map((link: ILink) => {
   link.key = `nav-link-${link.href}-${link.label}`;
   return link;

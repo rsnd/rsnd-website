@@ -8,13 +8,14 @@ type Props = {
 const GlobalStyle = createGlobalStyle<Props>`
   body, html{
     width: 100%;
-    height: 100%;
     font-size: 62.5%;
     padding: 0px;
+    overflow-y: scroll;
     margin: 0 auto;
-    overflow-x: hidden;
     box-sizing: border-box;
     font-family: 'eina-regular', 'Helvetica', 'sans-serif';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   };
   div {
     box-sizing: border-box;

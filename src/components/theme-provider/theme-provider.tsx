@@ -6,7 +6,8 @@ export const theme = {
     red: "#CE3A3A",
     white: "#FFFFFF",
     black: "#111111",
-    grey: "#676767"
+    grey: "#676767",
+    lightGrey: "#B9B9B9"
   },
   fonts: {
     eina: {
@@ -14,7 +15,8 @@ export const theme = {
     },
     druk: {
       heavy: "druk-heavy",
-      super: "druk-super"
+      super: "druk-super",
+      medium: "druk-medium"
     }
   }
 };

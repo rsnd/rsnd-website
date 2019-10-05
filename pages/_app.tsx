@@ -4,17 +4,20 @@ import Styled from "styled-components";
 import GlobalStyle from "components/global-styles";
 import ThemeProvider from "components/theme-provider";
 import ThemeContextProvider, { ThemeContext } from "context/theme-context";
+import Navigation, { CachetteNavigation } from "components/navigation";
+import Cursor from "components/cursor";
 
 const PagesWrapper = Styled.div<any>`
   background-color: ${props =>
     props.background ? props.background : "#111111"};
   color: ${props => (props.foreground ? props.foreground : "#111111")};
   width: 100%;
-  transition: transform .3s ease-out, color .35s ease-out, background-color .375s ease-out ;   
   position: fixed;
+  overflow: auto;
+  transition: transform .3s ease-out, color .35s ease-out, background-color .375s ease-out ;   
   top: 0;
   left: 0;
-  width: 100%;
+  border: 1px solid;
 `;
 
 interface Props {
@@ -23,20 +26,27 @@ interface Props {
 }
 
 export default class MyApp extends App<Props, {}> {
-  pageWrapper: React.RefObject<HTMLDivElement>;
-
   constructor(props) {
     super(props);
     this.pageWrapper = React.createRef<HTMLDivElement>();
   }
+  pageWrapper: React.RefObject<HTMLDivElement>;
+
+  setBodyHeight = height => {
+    document.body.style.height = height;
+  };
 
   componentDidMount() {
-    const LocomotiveScroll = require("locomotive-scroll").default;
-    const Scroll = new LocomotiveScroll({
-      el: this.pageWrapper.current,
-      smooth: true,
-      smoothMobile: true
+    const Parallax = require("helpers/parallax-scroll").default;
+    console.log(Parallax);
+    const Scroll = new Parallax({
+      preload: true,
+      native: true,
+      section: this.pageWrapper.current,
+      divs: document.querySelectorAll(".vs-div")
     });
+
+    Scroll.init();
   }
 
   render() {
@@ -49,12 +59,20 @@ export default class MyApp extends App<Props, {}> {
             <GlobalStyle />
             <ThemeContext.Consumer>
               {value => (
-                <PagesWrapper
-                  foreground={value.theme.foreground}
-                  background={value.theme.background}
-                  ref={this.pageWrapper}>
-                  <Component {...pageProps} />
-                </PagesWrapper>
+                <React.Fragment>
+                  <CachetteNavigation
+                    initVisible={false}
+                    navHeight={"8rem"}
+                    navComponent={<Navigation />}
+                  />
+                  <Cursor />
+                  <PagesWrapper
+                    foreground={value.theme.foreground}
+                    background={value.theme.background}
+                    ref={this.pageWrapper}>
+                    <Component {...pageProps} />
+                  </PagesWrapper>
+                </React.Fragment>
               )}
             </ThemeContext.Consumer>
           </React.Fragment>

@@ -5,7 +5,7 @@ interface ISectionContainerProps {
   bgColor?: string;
 }
 
-export const SectionContainerWrapper = Styled.div<ISectionContainerProps>`
+export const SectionContainerWrapper = Styled.div<ISectionContainerProps | any>`
     width: 100%;    
     min-height: ${props => (props.height ? props.height : "100vh")};
     background-color: ${props =>
