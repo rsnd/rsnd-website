@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -9,7 +9,6 @@ interface IProps {
 
 const ActiveLink: React.FC<IProps> = ({ children, ...props }) => {
   const router = useRouter();
-
   const child: any = React.Children.only(children);
 
   let className = child.props.className || "";

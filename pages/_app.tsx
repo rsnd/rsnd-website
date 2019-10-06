@@ -1,11 +1,12 @@
 import App from "next/app";
-import React from "react";
+import React, { useContext } from "react";
 import Styled from "styled-components";
 import GlobalStyle from "components/global-styles";
 import ThemeProvider from "components/theme-provider";
 import ThemeContextProvider, { ThemeContext } from "context/theme-context";
 import Navigation, { CachetteNavigation } from "components/navigation";
 import Cursor from "components/cursor";
+import CursorContextProvider, { CursorContext } from "context/cursor-context";
 
 const PagesWrapper = Styled.div<any>`
   background-color: ${props =>
@@ -55,27 +56,31 @@ export default class MyApp extends App<Props, {}> {
     return (
       <ThemeProvider>
         <ThemeContextProvider>
-          <React.Fragment>
-            <GlobalStyle />
-            <ThemeContext.Consumer>
-              {value => (
-                <React.Fragment>
-                  <CachetteNavigation
-                    initVisible={false}
-                    navHeight={"8rem"}
-                    navComponent={<Navigation />}
-                  />
-                  <Cursor />
-                  <PagesWrapper
-                    foreground={value.theme.foreground}
-                    background={value.theme.background}
-                    ref={this.pageWrapper}>
-                    <Component {...pageProps} />
-                  </PagesWrapper>
-                </React.Fragment>
-              )}
-            </ThemeContext.Consumer>
-          </React.Fragment>
+          <CursorContextProvider>
+            <React.Fragment>
+              <GlobalStyle />
+              <ThemeContext.Consumer>
+                {value => (
+                  <React.Fragment>
+                    <CachetteNavigation
+                      initVisible={false}
+                      navHeight={"8rem"}
+                      navComponent={<Navigation />}
+                    />
+                    <CursorContext.Consumer>
+                      {({ isHovered }) => <Cursor isHovered={isHovered} />}
+                    </CursorContext.Consumer>
+                    <PagesWrapper
+                      foreground={value.theme.foreground}
+                      background={value.theme.background}
+                      ref={this.pageWrapper}>
+                      <Component {...pageProps} />
+                    </PagesWrapper>
+                  </React.Fragment>
+                )}
+              </ThemeContext.Consumer>
+            </React.Fragment>
+          </CursorContextProvider>
         </ThemeContextProvider>
       </ThemeProvider>
     );

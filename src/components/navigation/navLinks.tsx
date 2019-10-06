@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "./Link";
 import Routes, { ILink } from "./routes";
 import Styled from "styled-components";
@@ -7,6 +7,7 @@ import Dropdown, {
   DropdownContent
 } from "react-simple-dropdown";
 import "react-simple-dropdown/styles/Dropdown.css";
+import { CursorContext } from "context/cursor-context";
 
 import DropdownIndicator from "../../../static/logos/dropdown-indicator.svg";
 
@@ -32,7 +33,7 @@ const LinksContainer = Styled.ul`
 
 const LinkItem = Styled.li<INavLinks>`
   overflow: hidden;
-  padding: 5px .5rem;
+  padding:  .4rem .8rem;
   position: ${props => (props.dropdown ? null : `relative`)};
   color: ${props =>
     props.darkTheme ? props.theme.colors.white : props.theme.colors.black};
@@ -133,37 +134,49 @@ const DropdownLinkItem = Styled.a`
   }
 `;
 
-const NavLinks: React.FC<INavLinks> = props => (
-  <nav>
-    <LinksContainer>
-      {links.map(({ key, href, label, dropdown, options }) => (
-        <LinkItem dropdown={dropdown} darkTheme={props.darkTheme} key={key}>
-          {!dropdown ? (
-            <Link activeClassName="active" href={href}>
-              <a data-content={label}>{label}</a>
-            </Link>
-          ) : (
-            <StyledDropdown>
-              <DropdownTrigger data-content={label}>
-                <span>{label}</span>
-              </DropdownTrigger>
-              <StyledDropdownContent>
-                <DropdownItemsContainer>
-                  {options.map(({ label, icon, href }) => (
-                    <DropdownLinkItem href={href}>
-                      <img src={icon} alt={`${label} logo`} />
-                      <span>{label}</span>
-                    </DropdownLinkItem>
-                  ))}
-                </DropdownItemsContainer>
-              </StyledDropdownContent>
-              <img src={DropdownIndicator} />
-            </StyledDropdown>
-          )}
-        </LinkItem>
-      ))}
-    </LinksContainer>
-  </nav>
-);
+const NavLinks: React.FC<INavLinks> = props => {
+  const { toggleHover } = useContext(CursorContext);
+  return (
+    <nav>
+      <LinksContainer>
+        {links.map(({ key, href, label, dropdown, options }) => (
+          <LinkItem
+            onMouseEnter={e => {
+              toggleHover(true);
+            }}
+            onMouseLeave={e => {
+              toggleHover(false);
+            }}
+            dropdown={dropdown}
+            darkTheme={props.darkTheme}
+            key={key}>
+            {!dropdown ? (
+              <Link activeClassName="active" href={href}>
+                <a data-content={label}>{label}</a>
+              </Link>
+            ) : (
+              <StyledDropdown>
+                <DropdownTrigger data-content={label}>
+                  <span>{label}</span>
+                </DropdownTrigger>
+                <StyledDropdownContent>
+                  <DropdownItemsContainer>
+                    {options.map(({ label, icon, href }) => (
+                      <DropdownLinkItem href={href}>
+                        <img src={icon} alt={`${label} logo`} />
+                        <span>{label}</span>
+                      </DropdownLinkItem>
+                    ))}
+                  </DropdownItemsContainer>
+                </StyledDropdownContent>
+                <img src={DropdownIndicator} />
+              </StyledDropdown>
+            )}
+          </LinkItem>
+        ))}
+      </LinksContainer>
+    </nav>
+  );
+};
 
 export default NavLinks;
