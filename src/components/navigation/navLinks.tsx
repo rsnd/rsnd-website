@@ -33,7 +33,7 @@ const LinksContainer = Styled.ul`
 
 const LinkItem = Styled.li<INavLinks>`
   overflow: hidden;
-  padding:  .4rem .8rem;
+  padding:  .8rem;
   position: ${props => (props.dropdown ? null : `relative`)};
   color: ${props =>
     props.darkTheme ? props.theme.colors.white : props.theme.colors.black};
@@ -162,7 +162,9 @@ const NavLinks: React.FC<INavLinks> = props => {
                 <StyledDropdownContent>
                   <DropdownItemsContainer>
                     {options.map(({ label, icon, href }) => (
-                      <DropdownLinkItem href={href}>
+                      <DropdownLinkItem
+                        key={`dropdown-link-${href}-${label}`}
+                        href={href}>
                         <img src={icon} alt={`${label} logo`} />
                         <span>{label}</span>
                       </DropdownLinkItem>

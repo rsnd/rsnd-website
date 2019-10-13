@@ -39,7 +39,6 @@ export default class MyApp extends App<Props, {}> {
 
   componentDidMount() {
     const Parallax = require("helpers/parallax-scroll").default;
-    console.log(Parallax);
     const Scroll = new Parallax({
       preload: true,
       native: true,

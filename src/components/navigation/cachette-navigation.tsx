@@ -169,9 +169,7 @@ export default class CachetteNavigation extends Component<Props, State> {
   componentDidMount() {
     // Add an Event Listener to listen for scroll Action
 
-    console.log(window);
     window.addEventListener("scroll", timer => {
-      // console.log("Scrolling");
       this.scrollTimerFn(timer);
     });
 
@@ -198,9 +196,6 @@ export default class CachetteNavigation extends Component<Props, State> {
   render() {
     const { isNavVisible, isScrolling } = this.state;
     const { navHeight } = this.props;
-
-    console.log(isNavVisible);
-    // console.log("Is Scrolling:", isScrolling);
     return (
       <CachetteWrapper
         className="cachette-wrapper"

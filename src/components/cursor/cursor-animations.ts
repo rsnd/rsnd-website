@@ -9,15 +9,15 @@ export const MoveCircle = (obj: {
     targets: obj.circle,
     easing: "easeOutCirc",
     duration: 100,
-    translateX: obj.e.pageX,
-    translateY: obj.e.pageY
+    translateX: obj.e.clientX,
+    translateY: obj.e.clientY
   });
   anime({
     targets: obj.follower,
     easing: "easeOutCirc",
     duration: 500,
-    left: obj.e.pageX + "px",
-    top: obj.e.pageY + "px"
+    left: obj.e.clientX + "px",
+    top: obj.e.clientY + "px"
   });
 };
 
@@ -27,7 +27,6 @@ export const HoveredFollower = (obj: {
   follower: string;
 }) => {
   const { isHovered, follower } = obj;
-  console.log("is hovered", isHovered);
   anime.remove(follower);
   const t = anime.timeline({
     targets: follower,
@@ -42,34 +41,25 @@ export const HoveredFollower = (obj: {
     }).add({
       scale: 1.85,
       duration: 400,
-      backgroundColor: "rgba(206,58,58, 0.18)",
+      backgroundColor: "rgba(206,58,58, 0.08)",
       translateX: "-15px",
       translateY: "-15px",
-      borderColor: "rgba(206,58,58, 0.2)"
+      border: ".35px solid rgba(206,58,58, 0.05)"
     });
   } else if (isHovered === false) {
     t.add({
       scale: 0.2,
-      duration: 100,
+      duration: 150,
       translateX: "-50px",
       backgroundColor: "rgba(206,58,58,0)",
       translateY: "-50px"
     }).add({
       targets: follower,
-      borderColor: "rgba(206,58,58, 1)",
+      border: ".5px solid rgba(206,58,58, 0.9)",
       scale: 1,
       duration: 550,
       translateX: "-25px",
       translateY: "-25px"
     });
-    // anime({
-    //   targets: follower,
-    //   borderColor: "rgba(206,58,58, 1)",
-    //   backgroundColor: "rgba(206,58,58,0)",
-    //   scale: [0.2, 1],
-    //   duration: 150,
-    //   translateX: "-25px",
-    //   translateY: "-25px"
-    // });
   }
 };

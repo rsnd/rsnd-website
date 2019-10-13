@@ -38,7 +38,7 @@ const Cursor: React.FC<IProps> = ({ isHovered }) => {
 
   return (
     <CursorContainer>
-      <CursorFollow ref={follower} id="cursor-follower" />
+      <CursorFollow isHovered={isHovered} ref={follower} id="cursor-follower" />
       <CursorCircle ref={circle} id="cursor-circle" />
     </CursorContainer>
   );
