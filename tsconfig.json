@@ -16,5 +16,11 @@
     "baseUrl": "./src"
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "next.config.js",
+    "src/components/page-components/home-page/wave-background/wavify.js"
+  ]
 }
