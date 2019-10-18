@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Flex, Box } from "rebass";
 import Styled from "styled-components";
-import { ThemeContext } from "context/theme-context";
 import Link from "next/link";
 import NavLinks from "./navLinks";
 import rsndLogo from "../../../static/logos/rsnd-logo.svg";
@@ -20,6 +19,8 @@ const NavWrapper = Styled.div<INavWrapperProps>`
     color: ${props => (props.color ? props.color : props.theme.colors.black)};
     background-color: ${props =>
       props.bgColor ? props.bgColor : "rgba(0,0,0,0)"};
+    position: relative;
+    z-index: 2;
     
 `;
 

@@ -15,6 +15,7 @@ export const CachetteWrapper = Styled.div<CachetteWrapperProps | any>`
 	transition: all 0.5s ease-in;
 	width: 100%;
 	position: fixed;
+  background-color: #FFF;
 	top: 0;
     left: 0;
     z-index: 10;

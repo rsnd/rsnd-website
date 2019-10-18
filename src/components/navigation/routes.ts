@@ -36,6 +36,11 @@ const routes = [
         label: "Google Podcasts",
         icon: "../../../static/logos/google-podcasts-logo.svg",
         href: "#"
+      },
+      {
+        label: "Stitcher",
+        icon: "../../../static/logos/stitcher-icon.svg",
+        href: "#"
       }
     ]
   },

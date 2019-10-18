@@ -65,13 +65,11 @@ class Parallax extends Smooth {
     const bottom = Math.round(cache.bottom + transform - current);
     const inview = bottom > 0 && top < this.vars.height;
     if (inview) {
-      el.style.border = "2px solid green";
       el.style.display = "block";
       el.classList.add("in-viewport");
       el.style[this.prefix] = this.getTransform(transform);
     } else {
       // add red border if out of viewport
-      el.style.border = "2px solid red";
       el.classList.remove("in-viewport");
     }
   }

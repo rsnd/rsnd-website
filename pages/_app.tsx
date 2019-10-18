@@ -9,16 +9,18 @@ import Cursor from "components/cursor";
 import CursorContextProvider, { CursorContext } from "context/cursor-context";
 
 const PagesWrapper = Styled.div<any>`
+  overflow-x: hidden;
   background-color: ${props =>
     props.background ? props.background : "#111111"};
   color: ${props => (props.foreground ? props.foreground : "#111111")};
-  width: 100%;
+  width: 100vw;
   position: fixed;
-  overflow: auto;
+  background-attachment: fixed;
+  overflow-x: auto;
   transition: transform .3s ease-out, color .35s ease-out, background-color .375s ease-out ;   
-  top: 0;
-  left: 0;
-  border: 1px solid;
+  /* top: 0;
+  left: 0; */
+  -webkit-overflow-scrolling: touch;
 `;
 
 interface Props {
@@ -45,11 +47,11 @@ export default class MyApp extends App<Props, {}> {
       section: this.pageWrapper.current,
       divs: document.querySelectorAll(".vs-div")
     });
-
     Scroll.init();
   }
 
   render() {
+    console.log("rendered");
     const { Component, pageProps } = this.props;
 
     return (
@@ -72,7 +74,9 @@ export default class MyApp extends App<Props, {}> {
                     <PagesWrapper
                       foreground={value.theme.foreground}
                       background={value.theme.background}
-                      ref={this.pageWrapper}>
+                      ref={this.pageWrapper}
+                      id="page-wrapper"
+                      className="vs-section">
                       <Component {...pageProps} />
                     </PagesWrapper>
                   </React.Fragment>

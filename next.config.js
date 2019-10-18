@@ -15,6 +15,7 @@ module.exports = withCSS(
         config.resolve.alias["context"] = path.join(__dirname, "src/context");
         config.resolve.alias["static"] = path.join(__dirname, "static");
         config.resolve.alias["helpers"] = path.join(__dirname, "src/helpers");
+        config.resolve.alias["hooks"] = path.join(__dirname, "src/hooks");
         return config;
       },
       transpileModules: ["react-spring", "@babel/runtime"]

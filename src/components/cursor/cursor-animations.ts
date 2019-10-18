@@ -2,13 +2,13 @@ import anime from "animejs";
 
 export const MoveCircle = (obj: {
   e: MouseEvent;
-  circle: string;
+  circle: string | string[];
   follower: string;
 }) => {
   anime({
     targets: obj.circle,
     easing: "easeOutCirc",
-    duration: 100,
+    duration: 10,
     translateX: obj.e.clientX,
     translateY: obj.e.clientY
   });

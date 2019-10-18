@@ -18,7 +18,8 @@ export const theme = {
       super: "druk-super",
       medium: "druk-medium"
     }
-  }
+  },
+  breakpoints: ["480px", "736px", "960px", "1280px"]
 };
 
 type themeType = typeof theme;
