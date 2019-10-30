@@ -78,7 +78,7 @@ const GlobalStyle = createGlobalStyle<Props>`
   }
   @font-face {
     font-family: "eina-regular";
-    src: url("/static/fonts/eina/eina-regular.woff2");
+    src: url("/static/fonts/eina/gilroy-medium.woff");
     font-style: normal;
     font-weight: 500;
   }
